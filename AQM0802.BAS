@@ -1,5 +1,6 @@
 REM ===============================
 REM AQM0802 class
+REM Ver 2025.11.08
 
 FIELD ADDR
 REM ==========================
@@ -24,7 +25,7 @@ REM Send command to AQM0802
 LABEL CMD
   VAR C
   C=ARGS(1) : REM command
-  I2CWRITE A,$0,C
+  I2CWRITE ADDR,$0,C
   DELAYMS 2
 RETURN
 
@@ -38,7 +39,7 @@ METHOD WSTR
   
   GOSUB CMD,$80+(R-1)*$40+C
   FOR I=0 TO LEN(S$)-1
-    I2CWRITE A, $40, ASC(S$(I,1))
+    I2CWRITE ADDR, $40, ASC(S$(I,1))
   NEXT
 RETURN
 
